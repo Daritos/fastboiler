@@ -1,0 +1,20 @@
+all:
+  children:
+    frontend:
+      hosts:
+        127.0.0.1:
+      vars:
+        #ansible_user: vagrant
+        #ansible_password: changeme
+        ansible_port: 22
+        #ansible_connection: ssh
+        ansible_connection: local
+    backend:
+      hosts:
+        127.0.0.1:
+      vars:
+        #ansible_user: vagrant
+        #ansible_password: changeme
+        ansible_port: 22
+        #ansible_connection: ssh
+        ansible_connection: local

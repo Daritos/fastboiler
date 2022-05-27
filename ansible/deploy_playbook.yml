@@ -1,0 +1,21 @@
+- name: Setup pre-reqs
+  hosts: 
+  - all
+  roles:
+  - docker
+- name: Deploy app base
+  hosts:
+  - frontend
+  - backend
+  roles:
+  - app_base
+- name: Configure frontend
+  hosts:
+  - frontend
+  roles:
+  - app_frontend
+- name: Configure backend
+  hosts:
+  - backend
+  roles:
+  - app_backend
