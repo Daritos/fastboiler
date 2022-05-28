@@ -1,5 +1,6 @@
 fastapi
-fastapi-limiter
+#fastapi-limiter
+git+https://github.com/long2ice/fastapi-limiter.git 
 pydantic
 celery
 uvicorn

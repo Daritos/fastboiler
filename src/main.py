@@ -16,7 +16,10 @@ app = FastAPI(
 
 @app.on_event("startup")
 async def startup():
-    redis = await aioredis.create_redis_pool(os.environ.get("REDIS_LIMITER_POOL", "redis://localhost:6379"))
+    redis = await aioredis.from_url(
+        os.environ.get("REDIS_LIMITER_POOL", "redis://localhost:6379"), encoding="utf-8", decode_responses=True
+    )
+    #redis = await aioredis.create_redis_pool(os.environ.get("REDIS_LIMITER_POOL", "redis://localhost:6379"))
     await FastAPILimiter.init(redis)
 
 app.include_router(api_router, prefix=API_V1_STR)

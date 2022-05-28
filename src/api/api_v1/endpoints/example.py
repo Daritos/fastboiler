@@ -53,7 +53,7 @@ async def limited(get_string: str):
     n, largest_prime_factor, elapsed_time = task.wait(timeout=None, interval=0.5)
 
     return {
-        "message1": "Hello, {get_string}!",
+        "message1": f"Hello, {get_string}!",
         "message2": f"The largest prime factor of {n} is {largest_prime_factor}. Calculation took {elapsed_time:0.3f} seconds.",
         "n": n,
         "largest_prime_factor": largest_prime_factor,
