@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 
-from api.core.logic.buisness_logic import run_prime_factor_calculation
+from api.core.logic.example import run_prime_factor_calculation
 
 router = APIRouter()
 
