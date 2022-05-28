@@ -43,15 +43,15 @@ project
 
 ```bash
 # Python
-sudo apt install python3 python3-dev
-sudo -H python -m ensurepip --upgrade
+sudo apt install python3 python3-dev python3-venv -y
+curl https://bootstrap.pypa.io/get-pip.py | sudo -H python3
 # Redis
 curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
 
 echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
 
 sudo apt update
-sudo apt install redis
+sudo apt install redis -y
 sudo systemctl enable redis
 sudo systemctl start redis
 ```
@@ -59,7 +59,6 @@ sudo systemctl start redis
 ### Setup virtualenv
 
 ```bash
-sudo -H pip install virtualenv
 python3 -m venv venv
 . ./venv/bin/activate
 pip install -r ./src/requirements.txt
