@@ -1,6 +1,11 @@
 # Fastboiler
 A FastAPI + Celery + Redis skeleton/example project
 
+| Service       | Port |
+|---------------|------|
+| Frontend      | 80   |
+| Dashboard     | 5555 |
+| Backend/Redis | 6379 |
 
 ## Project structure
 
@@ -30,4 +35,63 @@ project
         │   │
         │   └───endpoints [API endpoint definitions]
         ...
+```
+
+## Setup and running locally
+
+### Install dependencies
+
+```bash
+# Python
+sudo apt install python3 python3-dev
+sudo -H python -m ensurepip --upgrade
+# Redis
+curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+
+echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
+
+sudo apt update
+sudo apt install redis
+sudo systemctl enable redis
+sudo systemctl start redis
+```
+
+### Setup virtualenv
+
+```bash
+sudo -H pip install virtualenv
+python3 -m venv venv
+. ./venv/bin/activate
+pip install -r ./src/requirements.txt
+deactivate
+```
+
+### Running
+Open two (three if you want to run the monitoring dashboard) terminal windows
+
+#### Frontend
+Start the frontend in one of the terminals by running the following
+
+```bash
+. ./venv/bin/activate
+cd src
+uvicorn main:app --host 0.0.0.0 --reload
+```
+
+#### Backend
+Start the backend in one of the terminals by running the following
+
+```bash
+. ./venv/bin/activate
+cd src
+celery worker --app=worker.celery --loglevel=info --logfile=logs/celery.log
+```
+
+#### Monitoring Dashboard (optional)
+Start the backend monitoring dashboard by running the following
+
+```bash
+. ./venv/bin/activate
+cd src
+flower --app=worker.celery --port=5555 --broker=redis://localhost:6379/0
 ```
