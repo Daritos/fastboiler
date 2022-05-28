@@ -7,7 +7,7 @@ from celery.utils.log import get_task_logger
 
 ALLOWED_HOSTS = CommaSeparatedStrings(os.getenv("ALLOWED_HOSTS", ""))
 API_V1_STR = "/api/v1"
-PROJECT_NAME = "kubernetes-fastapi"
+PROJECT_NAME = "fastboiler"
 
 celery_tasks = [modname for importer, modname, ispkg in pkgutil.walk_packages(path=['./api/core/logic'], prefix='api.core.logic.', onerror=lambda x: None)]
 
