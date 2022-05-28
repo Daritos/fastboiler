@@ -1,4 +1,5 @@
 fastapi
+fastapi-limiter
 pydantic
 celery
 uvicorn
