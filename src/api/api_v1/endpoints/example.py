@@ -10,8 +10,8 @@ def hello_endpoint():
     """
     Respond to requests on the hello endpoint
     """
-
-    n, largest_prime_factor, elapsed_time = run_prime_factor_calculation()
+    task = run_prime_factor_calculation.delay()
+    n, largest_prime_factor, elapsed_time = task.wait(timeout=None, interval=0.5)
 
     return {
         "message1": "Hello, world!",

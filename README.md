@@ -3,7 +3,7 @@ A FastAPI + Celery + Redis skeleton/example project
 
 | Service       | Port |
 |---------------|------|
-| Frontend      | 80   |
+| Frontend      | 8000 |
 | Dashboard     | 5555 |
 | Backend/Redis | 6379 |
 
@@ -83,7 +83,7 @@ Start the backend in one of the terminals by running the following
 ```bash
 . ./venv/bin/activate
 cd src
-celery worker --app=worker.celery --loglevel=info --logfile=logs/celery.log
+celery -A worker.celery worker --loglevel=info --logfile=logs/celery.log
 ```
 
 #### Monitoring Dashboard (optional)
@@ -92,5 +92,5 @@ Start the backend monitoring dashboard by running the following
 ```bash
 . ./venv/bin/activate
 cd src
-flower --app=worker.celery --port=5555 --broker=redis://localhost:6379/0
+celery -A worker.celery flower --port=5555 --broker=redis://localhost:6379/0
 ```
